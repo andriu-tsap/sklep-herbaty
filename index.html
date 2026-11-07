@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zielnik — herbaty liściaste i zioła z małych plantacji</title>
+<meta name="description" content="Sklep internetowy z herbatą liściastą i mieszankami ziół. Darmowa dostawa od 120 zł, wysyłka w 24 h.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bar">Darmowa dostawa od 120 zł · Wysyłka w 24 h · Paczkomaty InPost</div>
+<header class="top">
+  <a class="logo" href="#">Zielnik</a>
+  <label class="search"><span class="sr">Szukaj herbaty</span><input type="search" id="q" placeholder="Szukaj: sencha, mięta, rooibos…"></label>
+  <button class="cart-btn" id="open-cart" aria-label="Koszyk">Koszyk <span id="count" class="count">0</span></button>
+</header>
+
+<main>
+<section class="hero">
+  <h1>Herbata, która smakuje jak miejsce, z którego pochodzi.</h1>
+  <p>Kupujemy bezpośrednio z 14 małych plantacji w Japonii, Indiach i na Tajwanie. Każda paczka ma datę zbioru na etykiecie.</p>
+</section>
+
+<section class="shop" aria-label="Produkty">
+  <aside class="filters" aria-label="Filtry">
+    <fieldset><legend>Rodzaj</legend><div id="cats"></div></fieldset>
+    <fieldset><legend>Cena do <output id="max-out">80 zł</output></legend><input type="range" id="max" min="20" max="80" step="5" value="80"></fieldset>
+    <fieldset><legend>Kofeina</legend>
+      <label class="radio"><input type="radio" name="caf" value="all" checked> Wszystkie</label>
+      <label class="radio"><input type="radio" name="caf" value="yes"> Z kofeiną</label>
+      <label class="radio"><input type="radio" name="caf" value="no"> Bez kofeiny</label>
+    </fieldset>
+    <button class="link" id="reset" type="button">Wyczyść filtry</button>
+  </aside>
+  <div class="results">
+    <div class="results-head">
+      <p id="found" aria-live="polite"></p>
+      <label>Sortuj <select id="sort"><option value="pop">Popularne</option><option value="asc">Cena rosnąco</option><option value="desc">Cena malejąco</option><option value="new">Najnowszy zbiór</option></select></label>
+    </div>
+    <ul class="grid" id="grid"></ul>
+  </div>
+</section>
+</main>
+
+<dialog id="product" aria-labelledby="p-title"></dialog>
+
+<div class="drawer-bg" id="drawer-bg" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Koszyk" aria-hidden="true">
+  <div class="drawer-head"><h2>Koszyk</h2><button class="x" id="close-cart" aria-label="Zamknij koszyk">×</button></div>
+  <div class="ship" id="ship"></div>
+  <ul class="lines" id="lines"></ul>
+  <div class="drawer-foot" id="drawer-foot"></div>
+</aside>
+
+<dialog id="checkout" aria-labelledby="co-title">
+  <form id="co-form" method="dialog" novalidate>
+    <div class="co-head"><h2 id="co-title">Dostawa i płatność</h2><button class="x" type="button" id="co-close" aria-label="Zamknij">×</button></div>
+    <div class="two">
+      <label>Imię i nazwisko<input name="name" required autocomplete="name"></label>
+      <label>E-mail<input name="email" type="email" required autocomplete="email"></label>
+    </div>
+    <fieldset class="opts"><legend>Dostawa</legend>
+      <label><input type="radio" name="ship" value="inpost" checked> Paczkomat InPost <em>12,99 zł</em></label>
+      <label><input type="radio" name="ship" value="kurier"> Kurier DPD <em>16,99 zł</em></label>
+      <label><input type="radio" name="ship" value="odbior"> Odbiór w Krakowie, ul. Józefa 9 <em>0 zł</em></label>
+    </fieldset>
+    <label id="locker-wrap">Kod paczkomatu<input name="locker" placeholder="np. KRA01M" pattern="[A-Za-z]{3}[0-9]{2,3}[A-Za-z]?"></label>
+    <fieldset class="opts"><legend>Płatność</legend>
+      <label><input type="radio" name="pay" value="blik" checked> BLIK</label>
+      <label><input type="radio" name="pay" value="karta"> Karta płatnicza</label>
+      <label><input type="radio" name="pay" value="przelew"> Szybki przelew</label>
+    </fieldset>
+    <div class="co-sum" id="co-sum"></div>
+    <p class="err" id="co-err" role="alert"></p>
+    <button class="btn" type="submit" id="pay-btn">Zamawiam i płacę</button>
+  </form>
+  <div class="thanks" id="thanks" hidden tabindex="-1"></div>
+</dialog>
+
+<footer class="foot">
+  <p>Zielnik to projekt koncepcyjny: sklep, produkty i ceny są fikcyjne. Płatność nie jest pobierana.</p>
+  <p>Projekt i kod: <a href="https://andriu-tsap.github.io">Andrii Tsap</a></p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
